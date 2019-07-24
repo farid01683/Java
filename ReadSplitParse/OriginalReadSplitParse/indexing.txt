@@ -1,0 +1,18 @@
+public class JavaApplication15 {
+
+    
+    public static void main(String[] args) {
+        int ab[][]=new int[12][1];
+        int i,j;
+        for(i=0;i<12;i++){
+            for(j=0;j<1;j++){
+                ab[i][j]=1;
+              System.out.println("ab[" +i+ "][" +j+ "] = " +ab[i][j] );    
+            }
+           
+        }
+        
+        }
+        
+    }
+    

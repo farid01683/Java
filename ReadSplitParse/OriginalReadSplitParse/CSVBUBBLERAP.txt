@@ -1,0 +1,117 @@
+
+package javaapplication12;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Random;
+
+
+class M {
+
+	 public int source, destination, TTL;
+}
+
+public class JavaApplication12 {
+
+    
+    public static void main(String[] args) {
+        
+        int msg_id, msgsource, msgdestination, Max=12, Min=1, ttl=7 ;
+		
+		M Message[] = new M [50];
+		
+		Random random1 = new Random();
+		
+		
+		for(msg_id=0; msg_id<Message.length; msg_id++){
+                    
+                msgsource = random1.nextInt(Max-Min);
+		msgdestination = random1.nextInt(Max-Min);
+		    
+		if (msgsource != msgdestination){		
+		Message [msg_id] = new M();
+		Message[msg_id].source= msgsource;
+                Message[msg_id].destination= msgdestination;
+                Message[msg_id].TTL= ttl;
+                
+                System.out.println("The source of the message is" +msgsource);
+                System.out.println("The destination of the message is" +msgdestination);
+                System.out.println("The TTL of the message is" +ttl);
+				
+                }
+			
+		
+    }
+        
+      //Input file which needs to be parsed
+        String fileToParse = "F:\\Gephi\\cut.csv";
+        BufferedReader fileReader = null;
+        int parse[][] = new int[6][2];
+         
+        //Delimiter used in CSV file
+        final String DELIMITER = ",";
+        try
+        {
+            String line = "";
+            //Create the file reader
+            fileReader = new BufferedReader(new FileReader(fileToParse));
+             
+            //Read the file line by line
+            //for skip 1st line
+            fileReader.readLine();
+            int count = 0;  
+            while ((line = fileReader.readLine()) != null)
+            {
+                //Get all tokens available in line
+                String[] tokens = line.split(DELIMITER);
+
+                for (int i=0; i<2; i++){
+                    int number;
+                    String numberAsString = tokens[i];
+                    number = Integer.parseInt(numberAsString);// PARSING
+                    parse[count][i] = number; // FOR SHOWING PARSE
+                }
+                count++;
+                
+            }
+            //int flag = 0; //flag 0 for Local Community
+            for(int j = 0; j < Message.length; j++){
+                if(Message[j] != null){
+                    for(int i = 0; i < 6; i++){
+                        if( Message[j].source == parse[i][0]){
+                            for(int k=0; k < 6; k++){
+                                if(Message[j].destination == parse[k][0]){
+                                    if(parse[i][1] == parse[k][1]){
+                                        System.out.println("Local Community");
+                                    } else {
+                                        System.out.println("Global Community");
+                                        //flag = 1;
+                                    }
+                                break;
+                                }
+                                
+                                
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        System.out.println(Arrays.deepToString(parse)); 
+    }
+}
+      

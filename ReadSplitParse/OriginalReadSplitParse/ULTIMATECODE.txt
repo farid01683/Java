@@ -1,0 +1,88 @@
+
+ 
+package code;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
+
+public class Code {
+
+   
+    public static void main(String[] args) {
+        
+        String count = "F:\\Gephi\\number.txt";
+        
+        int[][] intArray = new int[5][2];
+        
+        int a[][]=new int[12][2];
+        
+        int a_row = 12; // source [1, 12]
+        
+        int row = 0;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(count))) // READING THE LINE
+    
+        {
+            String line;
+        
+            while ((line = br.readLine()) != null) 
+        {
+            String[] currLine = line.split("\t"); // SPLITING 
+        
+            //    System.out.println(Arrays.toString(currLine)); // PRINTING SPLIT
+        
+       
+        
+                
+            for (int i=0; i<2; i++)
+                    
+        {
+                    
+            String numberAsString = currLine[i];
+            
+            intArray[row][i] = Integer.parseInt(numberAsString); // PARSING 
+        
+          
+                    
+        }
+            row++;
+        
+        }
+        } catch (IOException e) 
+    
+        {
+        e.printStackTrace();
+        }
+        
+        
+        for(int i=0;i<12;i++){
+            
+        a[i][0] = i+1;
+        a[i][1] = 0;
+      }
+        
+        for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 2; j++){
+            
+            int temp = intArray[i][j];
+            if(temp <= a_row){
+                
+                a[temp-1][1] += 1;
+            }
+        }
+    }
+        
+        for(int i = 0; i < 12; i++)
+        for(int j = 0; j < 2; j++)
+            System.out.println("a["+(i+ 1)+"]["+j+"]="+a[i][j]);
+
+        
+        System.out.println(Arrays.deepToString(intArray)); // PRINTING PARSE
+    }
+    
+        
+    }
+    
+

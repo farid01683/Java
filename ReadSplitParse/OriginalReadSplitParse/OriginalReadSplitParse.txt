@@ -1,0 +1,60 @@
+
+package ajaira;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
+
+
+public class Ajaira {
+
+   
+    public static void main(String[] args) 
+ 
+    {
+    
+        String count = "F:\\Gephi\\number.txt";
+        int countOfNum = 0;
+    
+        try (BufferedReader br = new BufferedReader(new FileReader(count))) // READING THE LINE
+    
+        {
+        String line;
+        while ((line = br.readLine()) != null) 
+        {
+        String[] currLine = line.split("\t"); // SPLITING 
+        
+        System.out.println(Arrays.toString(currLine)); // PRINTING SPLIT
+        
+       // countOfNum = countOfNum + currLine.length; // COUNTING NUMBER OF ELEMENTS
+        
+        int[] intArray = new int[currLine.length];
+                
+        for (int i=0; i<currLine.length-1; i++)
+                    
+        {
+                    
+        String numberAsString = currLine[i];
+        if (!numberAsString.equals(""))
+        intArray[i] = Integer.parseInt(numberAsString); // PARSING MAYBE?
+        
+            System.out.println("hello"+ intArray[0]);
+        
+        //System.out.println(numberAsString.trim()); // PRINTING PARSE
+           
+                    
+        }
+        
+        }
+        } catch (IOException e) 
+    
+        {
+        e.printStackTrace();
+        }
+
+        System.out.println("Total count of numbers : " +countOfNum);
+    }
+    
+    
+    }

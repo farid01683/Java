@@ -1,0 +1,63 @@
+package code;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
+
+public class Code {
+
+   
+    public static void main(String[] args) {
+        
+        String file = "F:\\Gephi\\number.txt";
+        
+        
+        int destination = 12, column = 2;
+        
+        int rank[][]= new int[destination][column];
+        int parse[][] = new int[5][column];
+        
+        
+        
+        int count = 0;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){ // READING THE LINE
+            String line;    
+            for(int i=0;i<destination;i++){
+                rank[i][0] = i+1;
+                rank[i][1] = 0;
+            }
+        
+            while ((line = br.readLine()) != null){
+                String[] splt = line.split("\t"); // SPLITING 
+                System.out.println(Arrays.toString(splt)); // PRINTING SPLIT
+                    
+                for (int i=0; i<column; i++){
+                    int number;
+                    String numberAsString = splt[i];
+                    number = Integer.parseInt(numberAsString);// PARSING 
+                    parse[count][i] = number; // FOR SHOWING PARSE
+                    if(number <= destination)
+                    rank[number-1][1] += 1;
+                }
+            
+                count++;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
+        
+        for(int i = 0; i < destination; i++)
+            for(int j = 0; j < column; j++)
+                
+                System.out.println("RANK["+(i+ 1)+"]["+j+"]="+rank[i][j]); // PRINT OF RANKS
+        
+        System.out.println("Total number of lines is" +count); // COUNT OF LINES
+        
+        System.out.println(Arrays.deepToString(parse)); // PRINTING PARSE
+    }
+}
+    
+

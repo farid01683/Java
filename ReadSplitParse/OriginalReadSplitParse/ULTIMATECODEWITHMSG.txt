@@ -1,0 +1,119 @@
+package javaapplication11;
+import java.util.Random;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
+
+class M {
+
+	 public int source, destination, TTL;
+}
+
+
+public class JavaApplication11 {
+
+    
+    public static void main(String[] args) {   
+        
+        int msg_id, msgsource, msgdestination, Max=12, Min=1, ttl=7 ;
+		
+		M Message[] = new M [50];
+		
+		Random random1 = new Random();
+		
+		
+		for(msg_id=0; msg_id<Message.length; msg_id++){
+                    
+                msgsource = random1.nextInt(Max-Min);
+		msgdestination = random1.nextInt(Max-Min);
+		    
+		if (msgsource != msgdestination){		
+		Message [msg_id] = new M();
+		Message[msg_id].source= msgsource;
+                Message[msg_id].destination= msgdestination;
+                Message[msg_id].TTL= ttl;
+                
+//                System.out.println("The source of the message is" +msgsource);
+//                System.out.println("The destination of the message is" +msgdestination);
+//                System.out.println("The TTL of the message is" +ttl);
+                  System.out.println("[ "+ Message[msg_id].source + ", "+ Message[msg_id].destination + ", "+ Message[msg_id].TTL + " ]");
+
+				
+                }
+         
+			
+		
+    }
+                
+                
+                String file = "F:\\Gephi\\number.txt";
+        
+        
+        int destination = 12, column = 2;
+        
+        int rank[][]= new int[destination][column];
+        int parse[][] = new int[5][column];
+        int deliver = 0;
+        
+        
+        
+        int count = 0;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){ // READING THE LINE
+            String line;    
+            for(int i=0;i<destination;i++){
+                rank[i][0] = i+1;
+                rank[i][1] = 0;
+            }
+        
+            while ((line = br.readLine()) != null){
+                String[] splt = line.split("\t"); // SPLITING 
+                System.out.println(Arrays.toString(splt)); // PRINTING SPLIT
+                    
+                for (int i=0; i<column; i++){
+                    int number;
+                    String numberAsString = splt[i];
+                    number = Integer.parseInt(numberAsString);// PARSING 
+                    parse[count][i] = number; // FOR SHOWING PARSE
+                    if(number <= destination)
+                    rank[number-1][1] += 1;
+                }
+                
+            
+                count++;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < Message.length; j++){
+                if(Message[j] != null){
+                    if(parse[i][0] == Message[j].source && parse[i][1] == Message[j].destination){
+                            deliver++;
+                        }
+                }
+            }
+        }
+        
+        System.out.println("End of Message");
+        
+        for(int i = 0; i < destination; i++)
+            for(int j = 0; j < column; j++)
+                
+                System.out.println("RANK["+(i+ 1)+"]["+j+"]="+rank[i][j]); // PRINT OF RANKS
+        
+        System.out.println("Total number of lines is" +count); // COUNT OF LINES
+        
+        System.out.println(Arrays.deepToString(parse)); // PRINTING PARSE
+        
+        System.out.println(deliver);
+    }
+}
+    
+    
+    
+    
+
